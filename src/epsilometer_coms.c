@@ -14,6 +14,20 @@
 
 
 /***************************************************************************//**
+ * @brief initialize the state of the TX ISR
+ * @Detail
+ * @return
+ * @Note
+*******************************************************************************/
+void TXstate_init() {
+
+
+
+
+}
+
+
+/***************************************************************************//**
  * @brief Set up the USART1 communication port
  * @Detail
  * @return
@@ -61,17 +75,45 @@ void UART_Setup() {
 void USART1_TX_IRQHandler(void)
 {
 
-  USART_IntDisable(USART1, USART_IEN_TXBL);
-  if ((int32_t) pendingSamples > 0) {
-	  if (USART1 ->IF & UART_IF_TXBL)
+//  USART_IntDisable(USART1, USART_IEN_TXBL);
+
+//  if (USART1 ->IF & UART_IF_TXBL)
+//	  {
+	switch (pendingSamples*byteSample - txSentBytes) {
+  		case 0:
+  			// send trailer + disable interrupt
+  	  		USART_Tx(USART1, 0x1e);
+  	  		USART_IntDisable(USART1, USART_IEN_TXBL);
+  	  		break;
+  		case 1:
+  			USART_Tx(USART1, dataBuffer[txSentBytes % bufferSize]);
+	  		txSentBytes++;
+  	  		break;
+
+  	  	default:
+  	  		// send numChannel blocs of 3 bytes (max 8 channels * 2 bytes) + re-enable interrupt
+  	  		for(int i=0;i<2;i++){
+  	  			/* Transmit pending character */
+  	  			USART_Tx(USART1, dataBuffer[txSentBytes % bufferSize]);
+  	  			txSentBytes++;
+  	  		}
+  	  	//USART_IntEnable(USART1, UART_IEN_TXBL);
+  	  	break;
+	}
+//	  }
+}
+
+
+
+ /*   if (USART1 ->IF & UART_IF_TXBL)
 	  {
 	   for(int i=0;i<3;i++){
-	      /* Transmit pending character */
+	      // Transmit pending character
 	      USART_Tx(USART1, dataBuffer[txSentBytes % bufferSize]);
 	      txSentBytes++;
 	    }
 
-	    /* Disable Tx interrupt if no more bytes in queue */
+	    // Disable Tx interrupt if no more bytes in queue
 	    //if ((int32_t) (pendingSamples*byteSample) - (int32_t) (txSentBytes) >= 3)
 		if (pendingSamples*byteSample - txSentBytes >= 3)
 	    {
@@ -86,7 +128,7 @@ void USART1_TX_IRQHandler(void)
 	  txSentBytes=0;
 	  USART_IntEnable(USART1, UART_IEN_TXBL);
   }
-}
+}*/
 
 
 void uartPutData(void)
