@@ -372,6 +372,7 @@ void GPIO_ODD_IRQHandler(void) {
 
 	AD7124_ChipSelect(sensors[0], LLO); // Select Master to Monitor DRDY pin
 
+	// enable the TX interrupt based on the buffer level
 	USART_IntEnable(USART1, UART_IEN_TXBL);
 //TODO stream out the data ?
 	// streamData(pendingsample)

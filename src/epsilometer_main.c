@@ -113,31 +113,19 @@ int main(void) {
 
 	int pendingTimeout = 0;
     #ifdef STREAMMODE
+	// define UART route baud rate endianness ect ....
 		UART_Setup();
 	#endif
 
+	// initialize the TX state (epsilometer_coms),
+	// start conversion: send SYNC signal and enable the sampling interrupt
 	AD7124_StartConversion(sensors[0]);
 
 	/****************************************************************
 	 * Primitive Sampling routine
 	 ****************************************************************/
 	while (1) {
-		if(pendingSamples-samplesSent>1) {
-			flagSync=0;
-			//uartPutData();
 
-		}//end if
-		else{
-			pendingTimeout++;
-		}//end else
-		if (pendingTimeout > 0xffff) {
-			//AD7124_StartConversion(boardSetup_ptr->numSensor);
-			//pendingTimeout = 0;
-		    //samplesSent =0;
-		    //numSync++;
-		    //flagSync=1;
-
-		}// end if
 	}// end while loop
 
 }// end main

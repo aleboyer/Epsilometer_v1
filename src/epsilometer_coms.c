@@ -14,20 +14,6 @@
 
 
 /***************************************************************************//**
- * @brief initialize the state of the TX ISR
- * @Detail
- * @return
- * @Note
-*******************************************************************************/
-void TXstate_init() {
-
-
-
-
-}
-
-
-/***************************************************************************//**
  * @brief Set up the USART1 communication port
  * @Detail
  * @return
@@ -64,79 +50,42 @@ void UART_Setup() {
 	NVIC_SetPriority(USART1_TX_IRQn, 1);
 }
 
+
 /***************************************************************************//**
  * @brief send 3 bytes through TX
  * @Detail send 3 bytes block when TX buffer (2 bytes for 2 FIFO level + 1 bytes for shift register)
  * @return
- * @Note likely written by leumas64
+ * @Note
 *******************************************************************************/
 
 
 void USART1_TX_IRQHandler(void)
 {
-
-//  USART_IntDisable(USART1, USART_IEN_TXBL);
-
-//  if (USART1 ->IF & UART_IF_TXBL)
-//	  {
-	switch (pendingSamples*byteSample - txSentBytes) {
-  		case 0:
-  			// send trailer + disable interrupt
-  	  		USART_Tx(USART1, 0x1e);
-  	  		USART_IntDisable(USART1, USART_IEN_TXBL);
-  	  		break;
-  		case 1:
-  			USART_Tx(USART1, dataBuffer[txSentBytes % bufferSize]);
-	  		txSentBytes++;
-  	  		break;
-
-  	  	default:
-  	  		// send numChannel blocs of 3 bytes (max 8 channels * 2 bytes) + re-enable interrupt
-  	  		for(int i=0;i<2;i++){
-  	  			/* Transmit pending character */
-  	  			USART_Tx(USART1, dataBuffer[txSentBytes % bufferSize]);
-  	  			txSentBytes++;
-  	  		}
-  	  	//USART_IntEnable(USART1, UART_IEN_TXBL);
-  	  	break;
+	dataLen = pendingSamples*byteSample-txSentBytes;
+	switch (dataLen){
+		case 0:
+			USART_IntDisable(USART1, USART_IEN_TXBL);
+			USART_Tx(USART1, 0x1e);
+			break;
+		case 1:
+			USART_Tx(USART1, dataBuffer[txSentBytes % bufferSize]);
+			txSentBytes++;
+			break;
+		default:
+			for(int i=0;i<2;i++){
+				/* Transmit pending character */
+				USART_Tx(USART1, dataBuffer[txSentBytes % bufferSize]);
+				txSentBytes++;
+			}
+			break;
 	}
-//	  }
+
 }
 
 
-
- /*   if (USART1 ->IF & UART_IF_TXBL)
-	  {
-	   for(int i=0;i<3;i++){
-	      // Transmit pending character
-	      USART_Tx(USART1, dataBuffer[txSentBytes % bufferSize]);
-	      txSentBytes++;
-	    }
-
-	    // Disable Tx interrupt if no more bytes in queue
-	    //if ((int32_t) (pendingSamples*byteSample) - (int32_t) (txSentBytes) >= 3)
-		if (pendingSamples*byteSample - txSentBytes >= 3)
-	    {
-	  	  USART_IntEnable(USART1, UART_IEN_TXBL);
-	    }
-		else{
-	      USART_Tx(USART1, 0x1e);
-		}
-	  }
-  }
-  else{
-	  txSentBytes=0;
-	  USART_IntEnable(USART1, UART_IEN_TXBL);
-  }
-}*/
-
-
-void uartPutData(void)
+/*void uartPutData(void)
 {
-  /* Enable interrupt on USART TX Buffer*/
-  if (pendingSamples*byteSample- txSentBytes >= 3){
-  }
-}
+}*/
 
 
 

@@ -11,9 +11,16 @@
 #include "ep_common.h"
 #include "em_gpio.h"
 
-uint8_t* dataPtr;
+
+
+
+
+uint32_t dataLen;
+
+
 
 void UART_Setup();
 void uartPutData();
+
 
 #endif /* EP_COMS_H_ */
