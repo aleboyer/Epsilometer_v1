@@ -61,6 +61,7 @@ void UART_Setup() {
 
 void USART1_TX_IRQHandler(void)
 {
+//TODO change to state machine
 	dataLen = pendingSamples*byteSample-txSentBytes;
 	switch (dataLen){
 		case 0:

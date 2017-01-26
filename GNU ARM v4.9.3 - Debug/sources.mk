@@ -28,7 +28,5 @@ SUBDIRS := \
 CMSIS/EFM32WG \
 Calendar \
 emlib \
-ff12b/src \
-ff12b/src/option \
 src \
 

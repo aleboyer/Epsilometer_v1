@@ -1,4 +1,8 @@
-src/epsilometer_main.o: ../src/epsilometer_main.c \
+emlib/microsd.o: \
+ /Applications/Simplicity\ Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0/hardware/kit/common/drivers/microsd.c \
+ /Users/aleboyer/SimplicityStudio/v4_workspace/Epsilometer_v1/ff12b/src/diskio.h \
+ /Users/aleboyer/SimplicityStudio/v4_workspace/Epsilometer_v1/ff12b/src/integer.h \
+ /Applications/Simplicity\ Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0/hardware/kit/common/drivers/microsd.h \
  /Applications/Simplicity\ Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0//platform/Device/SiliconLabs/EFM32WG/Include/em_device.h \
  /Applications/Simplicity\ Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0//platform/Device/SiliconLabs/EFM32WG/Include/efm32wg842f256.h \
  /Applications/Simplicity\ Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0//platform/CMSIS/Include/core_cm4.h \
@@ -46,31 +50,19 @@ src/epsilometer_main.o: ../src/epsilometer_main.c \
  /Applications/Simplicity\ Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0//platform/Device/SiliconLabs/EFM32WG/Include/efm32wg_uart.h \
  /Applications/Simplicity\ Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0//platform/Device/SiliconLabs/EFM32WG/Include/efm32wg_af_ports.h \
  /Applications/Simplicity\ Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0//platform/Device/SiliconLabs/EFM32WG/Include/efm32wg_af_pins.h \
- /Applications/Simplicity\ Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0//platform/emlib/inc/em_cmu.h \
- /Applications/Simplicity\ Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0//platform/emlib/inc/em_assert.h \
- /Applications/Simplicity\ Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0//platform/emlib/inc/em_bus.h \
- /Applications/Simplicity\ Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0//platform/emlib/inc/em_gpio.h \
- /Applications/Simplicity\ Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0//platform/emlib/inc/em_usart.h \
- /Applications/Simplicity\ Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0//platform/emlib/inc/em_chip.h \
- /Applications/Simplicity\ Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0//platform/emlib/inc/em_system.h \
- /Applications/Simplicity\ Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0//platform/emlib/inc/em_gpio.h \
- /Applications/Simplicity\ Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0//hardware/kit/common/drivers/microsd.h \
  /Users/aleboyer/SimplicityStudio/v4_workspace/Epsilometer_v1/inc/microsdconfig.h \
+ /Applications/Simplicity\ Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0//platform/emlib/inc/em_gpio.h \
+ /Applications/Simplicity\ Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0//platform/emlib/inc/em_bus.h \
+ /Applications/Simplicity\ Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0//platform/emlib/inc/em_assert.h \
  /Users/aleboyer/SimplicityStudio/v4_workspace/Epsilometer_v1/ff12b/src/integer.h \
- /Users/aleboyer/SimplicityStudio/v4_workspace/Epsilometer_v1/ff12b/src/ff.h \
- /Users/aleboyer/SimplicityStudio/v4_workspace/Epsilometer_v1/ff12b/src/integer.h \
- /Users/aleboyer/SimplicityStudio/v4_workspace/Epsilometer_v1/ff12b/src/ffconf.h \
- /Users/aleboyer/SimplicityStudio/v4_workspace/Epsilometer_v1/ff12b/src/diskio.h \
- /Users/aleboyer/SimplicityStudio/v4_workspace/Epsilometer_v1/inc/ep_common.h \
- /Users/aleboyer/SimplicityStudio/v4_workspace/Epsilometer_v1/inc/ep_analog.h \
- /Users/aleboyer/SimplicityStudio/v4_workspace/Epsilometer_v1/inc/ep_common.h \
- /Users/aleboyer/SimplicityStudio/v4_workspace/Epsilometer_v1/inc/ep_coms.h \
- /Users/aleboyer/SimplicityStudio/v4_workspace/Epsilometer_v1/inc/ep_coms.h \
- /Users/aleboyer/SimplicityStudio/v4_workspace/Epsilometer_v1/inc/ep_CMU_init.h \
- /Users/aleboyer/SimplicityStudio/v4_workspace/Epsilometer_v1/inc/ep_GPIO_init.h \
- /Users/aleboyer/SimplicityStudio/v4_workspace/Epsilometer_v1/inc/ep_TIMER_init.h \
- /Users/aleboyer/SimplicityStudio/v4_workspace/Epsilometer_v1/inc/ep_SDcard.h \
- /Users/aleboyer/SimplicityStudio/v4_workspace/Epsilometer_v1/Calendar/clock_tc.h
+ /Applications/Simplicity\ Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0//platform/emlib/inc/em_cmu.h \
+ /Applications/Simplicity\ Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0//platform/emlib/inc/em_usart.h
+
+/Users/aleboyer/SimplicityStudio/v4_workspace/Epsilometer_v1/ff12b/src/diskio.h:
+
+/Users/aleboyer/SimplicityStudio/v4_workspace/Epsilometer_v1/ff12b/src/integer.h:
+
+/Applications/Simplicity\ Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0/hardware/kit/common/drivers/microsd.h:
 
 /Applications/Simplicity\ Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0//platform/Device/SiliconLabs/EFM32WG/Include/em_device.h:
 
@@ -166,52 +158,16 @@ src/epsilometer_main.o: ../src/epsilometer_main.c \
 
 /Applications/Simplicity\ Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0//platform/Device/SiliconLabs/EFM32WG/Include/efm32wg_af_pins.h:
 
-/Applications/Simplicity\ Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0//platform/emlib/inc/em_cmu.h:
+/Users/aleboyer/SimplicityStudio/v4_workspace/Epsilometer_v1/inc/microsdconfig.h:
 
-/Applications/Simplicity\ Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0//platform/emlib/inc/em_assert.h:
+/Applications/Simplicity\ Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0//platform/emlib/inc/em_gpio.h:
 
 /Applications/Simplicity\ Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0//platform/emlib/inc/em_bus.h:
 
-/Applications/Simplicity\ Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0//platform/emlib/inc/em_gpio.h:
+/Applications/Simplicity\ Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0//platform/emlib/inc/em_assert.h:
+
+/Users/aleboyer/SimplicityStudio/v4_workspace/Epsilometer_v1/ff12b/src/integer.h:
+
+/Applications/Simplicity\ Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0//platform/emlib/inc/em_cmu.h:
 
 /Applications/Simplicity\ Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0//platform/emlib/inc/em_usart.h:
-
-/Applications/Simplicity\ Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0//platform/emlib/inc/em_chip.h:
-
-/Applications/Simplicity\ Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0//platform/emlib/inc/em_system.h:
-
-/Applications/Simplicity\ Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0//platform/emlib/inc/em_gpio.h:
-
-/Applications/Simplicity\ Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0//hardware/kit/common/drivers/microsd.h:
-
-/Users/aleboyer/SimplicityStudio/v4_workspace/Epsilometer_v1/inc/microsdconfig.h:
-
-/Users/aleboyer/SimplicityStudio/v4_workspace/Epsilometer_v1/ff12b/src/integer.h:
-
-/Users/aleboyer/SimplicityStudio/v4_workspace/Epsilometer_v1/ff12b/src/ff.h:
-
-/Users/aleboyer/SimplicityStudio/v4_workspace/Epsilometer_v1/ff12b/src/integer.h:
-
-/Users/aleboyer/SimplicityStudio/v4_workspace/Epsilometer_v1/ff12b/src/ffconf.h:
-
-/Users/aleboyer/SimplicityStudio/v4_workspace/Epsilometer_v1/ff12b/src/diskio.h:
-
-/Users/aleboyer/SimplicityStudio/v4_workspace/Epsilometer_v1/inc/ep_common.h:
-
-/Users/aleboyer/SimplicityStudio/v4_workspace/Epsilometer_v1/inc/ep_analog.h:
-
-/Users/aleboyer/SimplicityStudio/v4_workspace/Epsilometer_v1/inc/ep_common.h:
-
-/Users/aleboyer/SimplicityStudio/v4_workspace/Epsilometer_v1/inc/ep_coms.h:
-
-/Users/aleboyer/SimplicityStudio/v4_workspace/Epsilometer_v1/inc/ep_coms.h:
-
-/Users/aleboyer/SimplicityStudio/v4_workspace/Epsilometer_v1/inc/ep_CMU_init.h:
-
-/Users/aleboyer/SimplicityStudio/v4_workspace/Epsilometer_v1/inc/ep_GPIO_init.h:
-
-/Users/aleboyer/SimplicityStudio/v4_workspace/Epsilometer_v1/inc/ep_TIMER_init.h:
-
-/Users/aleboyer/SimplicityStudio/v4_workspace/Epsilometer_v1/inc/ep_SDcard.h:
-
-/Users/aleboyer/SimplicityStudio/v4_workspace/Epsilometer_v1/Calendar/clock_tc.h:

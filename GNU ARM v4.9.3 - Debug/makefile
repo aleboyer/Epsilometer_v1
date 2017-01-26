@@ -9,8 +9,6 @@ RM := rm -rf
 # All of the sources participating in the build are defined here
 -include sources.mk
 -include src/subdir.mk
--include ff12b/src/option/subdir.mk
--include ff12b/src/subdir.mk
 -include emlib/subdir.mk
 -include Calendar/subdir.mk
 -include CMSIS/EFM32WG/subdir.mk
@@ -49,7 +47,7 @@ all: Epsilometer_v1.axf
 Epsilometer_v1.axf: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: GNU ARM C++ Linker'
-	arm-none-eabi-g++ -g -gdwarf-2 -mcpu=cortex-m4 -mthumb -T "Epsilometer_v1.ld" --specs=nosys.specs -Xlinker --gc-sections -Xlinker -Map="Epsilometer_v1.map" -mfpu=fpv4-sp-d16 -mfloat-abi=softfp --specs=nano.specs -o Epsilometer_v1.axf "./CMSIS/EFM32WG/startup_efm32wg.o" "./CMSIS/EFM32WG/system_efm32wg.o" "./Calendar/clock_tc.o" "./Calendar/crystal_parameters.o" "./Calendar/main_calendar_tc.o" "./emlib/em_adc.o" "./emlib/em_cmu.o" "./emlib/em_emu.o" "./emlib/em_gpio.o" "./emlib/em_rtc.o" "./emlib/em_system.o" "./emlib/em_timer.o" "./emlib/em_usart.o" "./ff12b/src/diskio.o" "./ff12b/src/ff.o" "./ff12b/src/option/ccsbcs.o" "./src/epsilometer_CMU_init.o" "./src/epsilometer_GPIO_init.o" "./src/epsilometer_TIMER_init.o" "./src/epsilometer_analog.o" "./src/epsilometer_coms.o" "./src/epsilometer_main.o" -Wl,--start-group -lgcc -lc -lnosys -Wl,--end-group
+	arm-none-eabi-g++ -g -gdwarf-2 -mcpu=cortex-m4 -mthumb -T "Epsilometer_v1.ld" --specs=nosys.specs -Xlinker --gc-sections -Xlinker -Map="Epsilometer_v1.map" -mfpu=fpv4-sp-d16 -mfloat-abi=softfp --specs=nano.specs -o Epsilometer_v1.axf "./CMSIS/EFM32WG/startup_efm32wg.o" "./CMSIS/EFM32WG/system_efm32wg.o" "./Calendar/clock_tc.o" "./Calendar/crystal_parameters.o" "./Calendar/main_calendar_tc.o" "./emlib/em_adc.o" "./emlib/em_cmu.o" "./emlib/em_emu.o" "./emlib/em_gpio.o" "./emlib/em_rtc.o" "./emlib/em_system.o" "./emlib/em_timer.o" "./emlib/em_usart.o" "./emlib/microsd.o" "./src/epsilometer_CMU_init.o" "./src/epsilometer_GPIO_init.o" "./src/epsilometer_TIMER_init.o" "./src/epsilometer_analog.o" "./src/epsilometer_coms.o" "./src/epsilometer_main.o" -Wl,--start-group -lgcc -lc -lnosys -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

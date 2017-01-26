@@ -11,7 +11,8 @@ C_SRCS += \
 /Applications/Simplicity\ Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0/platform/emlib/src/em_rtc.c \
 /Applications/Simplicity\ Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0/platform/emlib/src/em_system.c \
 /Applications/Simplicity\ Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0/platform/emlib/src/em_timer.c \
-/Applications/Simplicity\ Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0/platform/emlib/src/em_usart.c 
+/Applications/Simplicity\ Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0/platform/emlib/src/em_usart.c \
+/Applications/Simplicity\ Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0/hardware/kit/common/drivers/microsd.c 
 
 OBJS += \
 ./emlib/em_adc.o \
@@ -21,7 +22,8 @@ OBJS += \
 ./emlib/em_rtc.o \
 ./emlib/em_system.o \
 ./emlib/em_timer.o \
-./emlib/em_usart.o 
+./emlib/em_usart.o \
+./emlib/microsd.o 
 
 C_DEPS += \
 ./emlib/em_adc.d \
@@ -31,7 +33,8 @@ C_DEPS += \
 ./emlib/em_rtc.d \
 ./emlib/em_system.d \
 ./emlib/em_timer.d \
-./emlib/em_usart.d 
+./emlib/em_usart.d \
+./emlib/microsd.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
@@ -88,6 +91,13 @@ emlib/em_usart.o: /Applications/Simplicity\ Studio.app/Contents/Eclipse/develope
 	@echo 'Building file: $<'
 	@echo 'Invoking: GNU ARM C Compiler'
 	arm-none-eabi-gcc -g -gdwarf-2 -mcpu=cortex-m4 -mthumb -std=c99 '-DDEBUG=1' '-DEFM32WG842F256=1' -I"/Users/aleboyer/SimplicityStudio/v4_workspace/Epsilometer_v1/emlib" -I"/Users/aleboyer/SimplicityStudio/v4_workspace/Epsilometer_v1/ff12b/src/option" -I"/Users/aleboyer/SimplicityStudio/v4_workspace/Epsilometer_v1/Calendar" -I"/Users/aleboyer/SimplicityStudio/v4_workspace/Epsilometer_v1/ff12b/src" -I"/Users/aleboyer/SimplicityStudio/v4_workspace/Epsilometer_v1/inc" -I"/Applications/Simplicity Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0//hardware/kit/common/bsp" -I"/Applications/Simplicity Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0//platform/emlib/inc" -I"/Applications/Simplicity Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0//hardware/kit/common/drivers" -I"/Applications/Simplicity Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0//platform/CMSIS/Include" -I"/Applications/Simplicity Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0//platform/Device/SiliconLabs/EFM32WG/Include" -O0 -Wall -c -fmessage-length=0 -mno-sched-prolog -fno-builtin -ffunction-sections -fdata-sections -mfpu=fpv4-sp-d16 -mfloat-abi=softfp -MMD -MP -MF"emlib/em_usart.d" -MT"emlib/em_usart.o" -o "$@" "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
+emlib/microsd.o: /Applications/Simplicity\ Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0/hardware/kit/common/drivers/microsd.c
+	@echo 'Building file: $<'
+	@echo 'Invoking: GNU ARM C Compiler'
+	arm-none-eabi-gcc -g -gdwarf-2 -mcpu=cortex-m4 -mthumb -std=c99 '-DDEBUG=1' '-DEFM32WG842F256=1' -I"/Users/aleboyer/SimplicityStudio/v4_workspace/Epsilometer_v1/emlib" -I"/Users/aleboyer/SimplicityStudio/v4_workspace/Epsilometer_v1/ff12b/src/option" -I"/Users/aleboyer/SimplicityStudio/v4_workspace/Epsilometer_v1/Calendar" -I"/Users/aleboyer/SimplicityStudio/v4_workspace/Epsilometer_v1/ff12b/src" -I"/Users/aleboyer/SimplicityStudio/v4_workspace/Epsilometer_v1/inc" -I"/Applications/Simplicity Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0//hardware/kit/common/bsp" -I"/Applications/Simplicity Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0//platform/emlib/inc" -I"/Applications/Simplicity Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0//hardware/kit/common/drivers" -I"/Applications/Simplicity Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0//platform/CMSIS/Include" -I"/Applications/Simplicity Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0//platform/Device/SiliconLabs/EFM32WG/Include" -O0 -Wall -c -fmessage-length=0 -mno-sched-prolog -fno-builtin -ffunction-sections -fdata-sections -mfpu=fpv4-sp-d16 -mfloat-abi=softfp -MMD -MP -MF"emlib/microsd.d" -MT"emlib/microsd.o" -o "$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 

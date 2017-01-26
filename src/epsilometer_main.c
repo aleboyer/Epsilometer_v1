@@ -26,6 +26,10 @@
 #include "em_usart.h"
 #include "em_chip.h"
 
+/* SD card library */
+#include "microsd.h"
+#include "ff.h"
+#include "diskio.h"
 
 /*local library */
 #include "ep_common.h"
@@ -34,10 +38,12 @@
 #include "ep_CMU_init.h"
 #include "ep_GPIO_init.h"
 #include "ep_TIMER_init.h"
+#include "ep_SDcard.h"
 
 
 #include "clock_tc.h"
 volatile bool doTemperatureCompensation = true;         // Flags that signal when to do temperature compensation
+
 
 #define STREAMMODE
 //#define STORAGEMODE
@@ -66,7 +72,7 @@ volatile uint32_t pendingSamples = 0; // counter in the background IRQ
 volatile uint32_t txSentBytes    = 0; // counter in the background IRQ
 volatile uint32_t numSync        = 0;    // number of sync signal sent
 volatile uint32_t flagSync       = 0;    // flag to reset pending sample in the interrupt.
-//int pendingSamples;
+
 
 
 
@@ -94,11 +100,13 @@ int main(void) {
 	define_ADC_configuration();
 
 
+
+
 	// set variable
-	numChannel       = boardSetup_ptr->numSensor + boardSetup_ptr->timeStampFlag;           // 2 temp + 2 shear +  1 cond + 3 accelerometer = 8 sensor max
-	byteSample       = numChannel*3;                                                      // 3 bytes per channel * number of channel. (ADC resolution 24 bits = 3 bytes)
-	bufferSize       = boardSetup_ptr->maxSamples*byteSample;                               //
-	uint32_t coreclockCycle   = boardSetup_ptr->coreClock/boardSetup_ptr->MclockFreq/2-1;       // 0xb=11 cycles of 14MHz clock
+	numChannel       = boardSetup_ptr->numSensor + boardSetup_ptr->timeStampFlag;               // 2 temp + 2 shear +  1 cond + 3 accelerometer = 8 sensor max
+	byteSample       = numChannel*3;                                                            // 3 bytes per channel * number of channel. (ADC resolution 24 bits = 3 bytes)
+	bufferSize       = boardSetup_ptr->maxSamples*byteSample;                                   //
+	uint32_t coreclockCycle   = boardSetup_ptr->coreClock/boardSetup_ptr->MclockFreq/2-1;       //
 	uint32_t timer1PhaseShift = .5 * coreclockCycle;
 
 	// uint32 array where data are stored and from where data are sent to the serial port
@@ -111,11 +119,12 @@ int main(void) {
 	 * Primitive Sampling routine
 	 * ***************************************************************/
 
-	int pendingTimeout = 0;
     #ifdef STREAMMODE
 	// define UART route baud rate endianness ect ....
 		UART_Setup();
 	#endif
+
+	//initSD();
 
 	// initialize the TX state (epsilometer_coms),
 	// start conversion: send SYNC signal and enable the sampling interrupt
