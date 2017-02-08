@@ -48,6 +48,7 @@
 
 #include "em_usart.h"
 #include "em_cmu.h"
+#include "efm32wg_uart.h"
 
 static const uint32_t bitFieldLookup[8] = {
 		0x00000001,
