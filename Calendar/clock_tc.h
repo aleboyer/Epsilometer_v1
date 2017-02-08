@@ -56,9 +56,9 @@ int main_calendar_setup (void);
   0,    /* tm_sec:   0 seconds (0-60, 60 = leap second)*/                                   \
   0,    /* tm_min:   0 minutes (0-59) */                                                    \
   12,   /* tm_hour:  0 hours (0-23) */                                                      \
-  1,    /* tm_mday:  1st day of the month (1 - 31) */                                       \
-  0,    /* tm_mon:   January (0 - 11, 0 = January) */                                       \
-  116,  /* tm_year:  Year 2012 (year since 1900) */                                         \
+  28,    /* tm_mday:  1st day of the month (1 - 31) */                                       \
+  2,    /* tm_mon:   January (0 - 11, 0 = January) */                                       \
+  117,  /* tm_year:  Year 2017 (year since 1900) */                                         \
   5,    /* tm_wday:  Sunday (0 - 6, 0 = Sunday) */                                          \
   0,    /* tm_yday:  1st day of the year (0-365) */                                         \
   -1,   /* tm_isdst: Daylight saving time; enabled (>0), disabled (=0) or unknown (<0) */   \
@@ -71,9 +71,9 @@ int main_calendar_setup (void);
   0,    /* tm_sec:   0 seconds (0-60, 60 = leap second)*/                                   \
   0,    /* tm_min:   0 minutes (0-59) */                                                    \
   12,   /* tm_hour:  0 hours (0-23) */                                                      \
-  1,    /* tm_mday:  1st day of the month (1 - 31) */                                       \
-  0,    /* tm_mon:   January (0 - 11, 0 = January) */                                       \
-  116,  /* tm_year:  Year 2012 (year since 1900) */                                         \
+  28,    /* tm_mday:  1st day of the month (1 - 31) */                                       \
+  2,    /* tm_mon:   January (0 - 11, 0 = January) */                                       \
+  117,  /* tm_year:  Year 2012 (year since 1900) */                                         \
   5,    /* tm_wday:  Sunday (0 - 6, 0 = Sunday) */                                          \
   0,    /* tm_yday:  1st day of the year (0-365) */                                         \
   -1    /* tm_isdst: Daylight saving time; enabled (>0), disabled (=0) or unknown (<0) */   \

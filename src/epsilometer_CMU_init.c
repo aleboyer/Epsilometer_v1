@@ -38,8 +38,6 @@ void init_CMU(void){
 	CMU_ClockEnable(cmuClock_TIMER1, true);
 
 
-	/* set up the 20 MHz clock */
-	CMU->CTRL =(CMU->CTRL &~_CMU_CTRL_HFXOMODE_MASK)| CMU_CTRL_HFXOMODE_DIGEXTCLK;
 
     // Enable the External Oscillator , true for enabling the O and false to not wait
     CMU_OscillatorEnable(cmuOsc_HFXO,true,false);
@@ -53,6 +51,8 @@ void init_CMU(void){
     // Wait for the HFXO Clock to be Stable - Or infinite in case of error
     while(gulclockset != 1);
 
-    CMU->CTRL =(CMU->CTRL &~_CMU_CTRL_CLKOUTSEL0_MASK)| CMU_CTRL_CLKOUTSEL0_HFCLK16;
+    /* set up the 20 MHz clock */
+	CMU->CTRL =(CMU->CTRL &~_CMU_CTRL_HFXOMODE_MASK)| CMU_CTRL_HFXOMODE_DIGEXTCLK;
+    CMU->CTRL =(CMU->CTRL &~_CMU_CTRL_CLKOUTSEL0_MASK)| CMU_CTRL_CLKOUTSEL0_HFXO;
     CMU->ROUTE =(CMU->ROUTE &~_CMU_ROUTE_CLKOUT0PEN_MASK)| CMU_ROUTE_CLKOUT0PEN;
 }

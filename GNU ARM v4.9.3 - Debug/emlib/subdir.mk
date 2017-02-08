@@ -8,6 +8,7 @@ C_SRCS += \
 /Applications/Simplicity\ Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0/platform/emlib/src/em_cmu.c \
 /Applications/Simplicity\ Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0/platform/emlib/src/em_emu.c \
 /Applications/Simplicity\ Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0/platform/emlib/src/em_gpio.c \
+/Applications/Simplicity\ Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0/platform/emlib/src/em_int.c \
 /Applications/Simplicity\ Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0/platform/emlib/src/em_rtc.c \
 /Applications/Simplicity\ Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0/platform/emlib/src/em_system.c \
 /Applications/Simplicity\ Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0/platform/emlib/src/em_timer.c \
@@ -19,6 +20,7 @@ OBJS += \
 ./emlib/em_cmu.o \
 ./emlib/em_emu.o \
 ./emlib/em_gpio.o \
+./emlib/em_int.o \
 ./emlib/em_rtc.o \
 ./emlib/em_system.o \
 ./emlib/em_timer.o \
@@ -30,6 +32,7 @@ C_DEPS += \
 ./emlib/em_cmu.d \
 ./emlib/em_emu.d \
 ./emlib/em_gpio.d \
+./emlib/em_int.d \
 ./emlib/em_rtc.d \
 ./emlib/em_system.d \
 ./emlib/em_timer.d \
@@ -63,6 +66,13 @@ emlib/em_gpio.o: /Applications/Simplicity\ Studio.app/Contents/Eclipse/developer
 	@echo 'Building file: $<'
 	@echo 'Invoking: GNU ARM C Compiler'
 	arm-none-eabi-gcc -g -gdwarf-2 -mcpu=cortex-m4 -mthumb -std=c99 '-DDEBUG=1' '-DEFM32WG842F256=1' -I"/Users/aleboyer/SimplicityStudio/v4_workspace/Epsilometer_v1/emlib" -I"/Users/aleboyer/SimplicityStudio/v4_workspace/Epsilometer_v1/ff12b/src/option" -I"/Users/aleboyer/SimplicityStudio/v4_workspace/Epsilometer_v1/Calendar" -I"/Users/aleboyer/SimplicityStudio/v4_workspace/Epsilometer_v1/ff12b/src" -I"/Users/aleboyer/SimplicityStudio/v4_workspace/Epsilometer_v1/inc" -I"/Applications/Simplicity Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0//hardware/kit/common/bsp" -I"/Applications/Simplicity Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0//platform/emlib/inc" -I"/Applications/Simplicity Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0//hardware/kit/common/drivers" -I"/Applications/Simplicity Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0//platform/CMSIS/Include" -I"/Applications/Simplicity Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0//platform/Device/SiliconLabs/EFM32WG/Include" -O0 -Wall -c -fmessage-length=0 -mno-sched-prolog -fno-builtin -ffunction-sections -fdata-sections -mfpu=fpv4-sp-d16 -mfloat-abi=softfp -MMD -MP -MF"emlib/em_gpio.d" -MT"emlib/em_gpio.o" -o "$@" "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
+emlib/em_int.o: /Applications/Simplicity\ Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0/platform/emlib/src/em_int.c
+	@echo 'Building file: $<'
+	@echo 'Invoking: GNU ARM C Compiler'
+	arm-none-eabi-gcc -g -gdwarf-2 -mcpu=cortex-m4 -mthumb -std=c99 '-DDEBUG=1' '-DEFM32WG842F256=1' -I"/Users/aleboyer/SimplicityStudio/v4_workspace/Epsilometer_v1/emlib" -I"/Users/aleboyer/SimplicityStudio/v4_workspace/Epsilometer_v1/ff12b/src/option" -I"/Users/aleboyer/SimplicityStudio/v4_workspace/Epsilometer_v1/Calendar" -I"/Users/aleboyer/SimplicityStudio/v4_workspace/Epsilometer_v1/ff12b/src" -I"/Users/aleboyer/SimplicityStudio/v4_workspace/Epsilometer_v1/inc" -I"/Applications/Simplicity Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0//hardware/kit/common/bsp" -I"/Applications/Simplicity Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0//platform/emlib/inc" -I"/Applications/Simplicity Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0//hardware/kit/common/drivers" -I"/Applications/Simplicity Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0//platform/CMSIS/Include" -I"/Applications/Simplicity Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0//platform/Device/SiliconLabs/EFM32WG/Include" -O0 -Wall -c -fmessage-length=0 -mno-sched-prolog -fno-builtin -ffunction-sections -fdata-sections -mfpu=fpv4-sp-d16 -mfloat-abi=softfp -MMD -MP -MF"emlib/em_int.d" -MT"emlib/em_int.o" -o "$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 

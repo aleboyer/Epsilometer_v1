@@ -39,9 +39,11 @@
 #include "ep_GPIO_init.h"
 #include "ep_TIMER_init.h"
 #include "ep_SDcard.h"
+#include "clock_tc.h"
 
 
 #include "clock_tc.h"
+/* Flags that signal when to do temperature compensation and display update  */
 volatile bool doTemperatureCompensation = true;         // Flags that signal when to do temperature compensation
 
 
@@ -100,11 +102,13 @@ int main(void) {
 	define_ADC_configuration();
 
 
+	main_calendar_setup();
+
 
 
 	// set variable
 	numChannel       = boardSetup_ptr->numSensor + boardSetup_ptr->timeStampFlag;               // 2 temp + 2 shear +  1 cond + 3 accelerometer = 8 sensor max
-	byteSample       = numChannel*3;                                                            // 3 bytes per channel * number of channel. (ADC resolution 24 bits = 3 bytes)
+	byteSample       = boardSetup_ptr->numSensor*3+ boardSetup_ptr->timeStampFlag * 4;          // 3 bytes per sensor channel * number of sensor channel + (4) bytes for RTC->CNT
 	bufferSize       = boardSetup_ptr->maxSamples*byteSample;                                   //
 	uint32_t coreclockCycle   = boardSetup_ptr->coreClock/boardSetup_ptr->MclockFreq/2-1;       //
 	uint32_t timer1PhaseShift = .5 * coreclockCycle;
@@ -124,6 +128,11 @@ int main(void) {
 		UART_Setup();
 	#endif
 
+    static int cur_min = -1, cur_sec = -1;
+    struct tm tsplt;
+
+ 	time_t t = time(NULL);
+    localtime_r (&t, &tsplt);
 	//initSD();
 
 	// initialize the TX state (epsilometer_coms),
@@ -134,6 +143,18 @@ int main(void) {
 	 * Primitive Sampling routine
 	 ****************************************************************/
 	while (1) {
+
+//		  time_t t;
+//	      time( &t );
+    	  time_t t = time(NULL);
+	      localtime_r (&t, &tsplt);
+
+	      if (doTemperatureCompensation)	// Perform temperature compensation
+	  	  {
+	  	    doTemperatureCompensation = false;  // Clear doTemperatureCompensation flag
+	  	    clockDoTemperatureCompensation();
+	  	  }
+
 
 	}// end while loop
 

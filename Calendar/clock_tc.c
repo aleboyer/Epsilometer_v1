@@ -48,6 +48,7 @@
 #include "em_device.h"
 #include "em_emu.h"
 #include "em_int.h"
+//#include "em_msc.c"
 
 /* Include temperature compensated system clock */
 #include "clock_tc.h"

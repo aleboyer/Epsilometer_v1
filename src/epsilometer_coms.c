@@ -84,10 +84,6 @@ void USART1_TX_IRQHandler(void)
 }
 
 
-/*void uartPutData(void)
-{
-}*/
-
 
 
 

@@ -47,6 +47,11 @@
 			<locationURI>STUDIO_SDK_LOC/platform/emlib/src/em_gpio.c</locationURI>
 		</link>
 		<link>
+			<name>emlib/em_int.c</name>
+			<type>1</type>
+			<locationURI>STUDIO_SDK_LOC/platform/emlib/src/em_int.c</locationURI>
+		</link>
+		<link>
 			<name>emlib/em_rtc.c</name>
 			<type>1</type>
 			<locationURI>STUDIO_SDK_LOC/platform/emlib/src/em_rtc.c</locationURI>

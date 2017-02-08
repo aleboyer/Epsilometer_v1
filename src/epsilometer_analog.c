@@ -49,38 +49,100 @@
 #include "em_usart.h"
 #include "em_cmu.h"
 
+static const uint32_t bitFieldLookup[8] = {
+		0x00000001,
+		0x00000003,
+		0x00000007,
+		0x0000000F,
+		0x0000001F,
+		0x0000003F,
+		0x0000007F,
+		0x000000FF}
+;
+
+
+uint32_t Create_Mask(uint32_t nbits, uint32_t start_pos) {
+	return bitFieldLookup[nbits] << start_pos;
+}
+
+uint32_t Data_Bit_Shift(uint32_t data, uint32_t start_pos) {
+	return data << start_pos;
+}
+
+// Register Bit Setting Routine
+// data needs to be left shifted to start position
+uint32_t Merge_Bits(uint32_t reg, uint32_t data, uint32_t mask) {
+	return reg ^ ((reg ^ data) & mask);
+}
+
+// Register Bit Setting Routine
+void Set_Value_16Bit_Register(uint16_t* reg, uint16_t value, uint16_t nbits, uint16_t start_pos)
+{
+  int i, j;
+  uint16_t temp_value;
+  temp_value = value;  						// use 16 bit temp register to shift into
+  for (i = 0, j = start_pos; i < nbits; i++, j++){
+	*reg &= ~(1 << j); 						//clear each bit in the target field's mask
+    *reg |= (((temp_value >> i) & 1) << j); //find byte position then set bit
+  }
+}
+
+
+
 
 void define_ADC_configuration(void){
+
+
 	AD7124 COMMON_SETUP = AD7124_RESET_DEFAULT;
 	COMMON_SETUP.ERROR_EN = AD7124_ERREN_REG_REF_DET_ERR_EN | AD7124_ERREN_REG_SPI_IGNORE_ERR_EN;
-	COMMON_SETUP.CONFIG_0 = AD7124_CONFIG_BIPOLAR |
-				AD7124_CONFIG_BURNOUT_OFF |
-				AD7124_CONFIG_INTREF |
-				AD7124_CONFIG_GAIN_1;
-	COMMON_SETUP.ADC_CONTROL = AD7124_CTRL_CS_EN(0) |
-				AD7124_CTRL_HIG_PWR |
-				AD7124_CTRL_CONT_MODE |
-				AD7124_CTRL_REF_EN(1) |
-				AD7124_CTRL_CLKSEL(2);
+
+	Set_Value_16Bit_Register(&COMMON_SETUP.CONFIG_0, AD7124_CONFIG_BIPOLAR_ENABLE, AD7124_CONFIG_BIPOLAR_NUM_BITS, AD7124_CONFIG_BIPOLAR_START_POSITION);
+	Set_Value_16Bit_Register(&COMMON_SETUP.CONFIG_0, AD7124_CONFIG_BURNOUT_OFF, AD7124_CONFIG_BURNOUT_NUM_BITS, AD7124_CONFIG_BURNOUT_START_POSITION);
+	Set_Value_16Bit_Register(&COMMON_SETUP.CONFIG_0, AD7124_CONFIG_INT_REF, AD7124_CONFIG_REF_SEL_NUM_BITS, AD7124_CONFIG_REF_SEL_START_POSITION);
+	Set_Value_16Bit_Register(&COMMON_SETUP.CONFIG_0, AD7124_CONFIG_PGA_GAIN_1, AD7124_CONFIG_PGA_NUM_BITS, AD7124_CONFIG_PGA_START_POSITION);
+
+	Set_Value_16Bit_Register(&COMMON_SETUP.ADC_CONTROL, AD7124_CTRL_CS_EN_ENABLE, AD7124_CTRL_CS_EN_NUM_BITS, AD7124_CTRL_CS_EN_START_POSITION);
+	Set_Value_16Bit_Register(&COMMON_SETUP.ADC_CONTROL, AD7124_CTRL_POWER_MODE_HIGH, AD7124_CTRL_POWER_MODE_NUM_BITS, AD7124_CTRL_POWER_MODE_START_POSITION);
+	Set_Value_16Bit_Register(&COMMON_SETUP.ADC_CONTROL, AD7124_CTRL_MODE_CONTINUOUS, AD7124_CTRL_MODE_NUM_BITS, AD7124_CTRL_MODE_START_POSITION);
+	Set_Value_16Bit_Register(&COMMON_SETUP.ADC_CONTROL, AD7124_CTRL_REF_EN_ENABLE, AD7124_CTRL_REF_EN_NUM_BITS, AD7124_CTRL_REF_EN_START_POSITION);
+	Set_Value_16Bit_Register(&COMMON_SETUP.ADC_CONTROL, AD7124_CTRL_CLKSEL_EXT, AD7124_CTRL_CLKSEL_NUM_BITS, AD7124_CTRL_CLKSEL_START_POSITION);
 
 	COMMON_SETUP.FILTER_0 = 0x06003C; // 0x3C for 320hz on sinc4 filter
 
 	AD7124 TEMP_SETUP = COMMON_SETUP;
-	TEMP_SETUP.CHANNEL_0 = AD7124_CH_EN | AD7124_CH_AINP(0) | AD7124_CH_AINM(1);
+	Set_Value_16Bit_Register(&TEMP_SETUP.CHANNEL_0, AD7124_CH_ENABLE, AD7124_CH_EN_NUM_BITS, AD7124_CH_EN_START_POSITION);
+	Set_Value_16Bit_Register(&TEMP_SETUP.CHANNEL_0, AD7124_CH_AINP_AIN0, AD7124_CH_AINP_NUM_BITS, AD7124_CH_AINP_START_POSITION);
+	Set_Value_16Bit_Register(&TEMP_SETUP.CHANNEL_0, AD7124_CH_AINM_AIN1, AD7124_CH_AINM_NUM_BITS, AD7124_CH_AINM_START_POSITION);
 
 	AD7124 SHR_SETUP = COMMON_SETUP;
-	SHR_SETUP.CHANNEL_0 = AD7124_CH_EN | AD7124_CH_AINP(0) | AD7124_CH_AINM(1);
-	//SHR_SETUP.CONFIG_0 = AD7124_CONFIG_UNIPOLAR;  //sml added this for analog test dev board (with grounded AINM)
+	Set_Value_16Bit_Register(&SHR_SETUP.CHANNEL_0, AD7124_CH_ENABLE, AD7124_CH_EN_NUM_BITS, AD7124_CH_EN_START_POSITION);
+	Set_Value_16Bit_Register(&SHR_SETUP.CHANNEL_0, AD7124_CH_AINP_AIN0, AD7124_CH_AINP_NUM_BITS, AD7124_CH_AINP_START_POSITION);
+	Set_Value_16Bit_Register(&SHR_SETUP.CHANNEL_0, AD7124_CH_AINM_AIN1, AD7124_CH_AINM_NUM_BITS, AD7124_CH_AINM_START_POSITION);
+	Set_Value_16Bit_Register(&SHR_SETUP.CONFIG_0, AD7124_CONFIG_BIPOLAR_ENABLE, AD7124_CONFIG_BIPOLAR_NUM_BITS, AD7124_CONFIG_BIPOLAR_START_POSITION);
+//	Set_Value_16Bit_Register(&SHR_SETUP.CONFIG_0, AD7124_CONFIG_AIN_BUFP_ON, AD7124_CONFIG_AIN_BUFP_NUM_BITS, AD7124_CONFIG_AIN_BUFP_START_POSITION);
+//	Set_Value_16Bit_Register(&SHR_SETUP.CONFIG_0, AD7124_CONFIG_AIN_BUFM_ON, AD7124_CONFIG_AIN_BUFM_NUM_BITS, AD7124_CONFIG_AIN_BUFM_START_POSITION);
+	Set_Value_16Bit_Register(&SHR_SETUP.CONFIG_0, AD7124_CONFIG_PGA_GAIN_2, AD7124_CONFIG_PGA_NUM_BITS, AD7124_CONFIG_PGA_START_POSITION);
+
+	/*	SHR_SETUP.CONFIG_0 = Merge_Bits(SHR_SETUP.CONFIG_0, \
+				Data_Bit_Shift(AD7124_CONFIG_BIPOLAR_DISABLE, AD7124_CONFIG_BIPOLAR_START_POSITION), \
+				Create_Mask(AD7124_CONFIG_BIPOLAR_NUM_BITS, AD7124_CONFIG_BIPOLAR_START_POSITION)); */
 
 	AD7124 ACCL_SETUP = COMMON_SETUP;
-	ACCL_SETUP.CHANNEL_0 = AD7124_CH_EN | AD7124_CH_AINP(0) | AD7124_CH_AINM(1); //TODO: GND reference to refin1-
-	ACCL_SETUP.CONFIG_0 = AD7124_CONFIG_UNIPOLAR;
+	Set_Value_16Bit_Register(&ACCL_SETUP.CHANNEL_0, AD7124_CH_ENABLE, AD7124_CH_EN_NUM_BITS, AD7124_CH_EN_START_POSITION);
+	Set_Value_16Bit_Register(&ACCL_SETUP.CHANNEL_0, AD7124_CH_AINP_AIN0, AD7124_CH_AINP_NUM_BITS, AD7124_CH_AINP_START_POSITION);
+	Set_Value_16Bit_Register(&ACCL_SETUP.CHANNEL_0, AD7124_CH_AINM_AVSS, AD7124_CH_AINM_NUM_BITS, AD7124_CH_AINM_START_POSITION);
+	Set_Value_16Bit_Register(&ACCL_SETUP.CONFIG_0, AD7124_CONFIG_BIPOLAR_DISABLE, AD7124_CONFIG_BIPOLAR_NUM_BITS, AD7124_CONFIG_BIPOLAR_START_POSITION);
+	Set_Value_16Bit_Register(&ACCL_SETUP.CONFIG_0, AD7124_CONFIG_REF_SEL1, AD7124_CONFIG_REF_SEL_NUM_BITS, AD7124_CONFIG_REF_SEL_START_POSITION);
+
+
 
 	AD7124 COND_SETUP = COMMON_SETUP;
-	COND_SETUP.CHANNEL_0 = AD7124_CH_EN | AD7124_CH_AINP(0) | AD7124_CH_AINM(1);
+	Set_Value_16Bit_Register(&COND_SETUP.CHANNEL_0, AD7124_CH_ENABLE, AD7124_CH_EN_NUM_BITS, AD7124_CH_EN_START_POSITION);
+	Set_Value_16Bit_Register(&COND_SETUP.CHANNEL_0, AD7124_CH_AINP_AIN0, AD7124_CH_AINP_NUM_BITS, AD7124_CH_AINP_START_POSITION);
+	Set_Value_16Bit_Register(&COND_SETUP.CHANNEL_0, AD7124_CH_AINM_AIN1, AD7124_CH_AINM_NUM_BITS, AD7124_CH_AINM_START_POSITION);
 
 	AD7124 OFF_SETUP = AD7124_RESET_DEFAULT;
-	OFF_SETUP.ADC_CONTROL = OFF_SETUP.ADC_CONTROL | AD7124_CTRL_PWRDOWN_MODE;
+	Set_Value_16Bit_Register(&OFF_SETUP.ADC_CONTROL, AD7124_CTRL_MODE_POWER_DOWN, AD7124_CTRL_POWER_MODE_NUM_BITS, AD7124_CTRL_POWER_MODE_START_POSITION);
 
 
 	uint32_t delay = 0xFFFF;
@@ -351,7 +413,7 @@ void GPIO_ODD_IRQHandler(void) {
 		for(int ii = 0; ii < 3; ii++) {
 	//TODO check out endiannes when this
 			dataBuffer[(pendingSamples*byteSample+i*3+ii) % bufferSize] = USART_SpiTransfer(USART0, 0x0);
-			if (i==2){
+			if (i==10){
 				count=pendingSamples % 500;
 				count_ptr=(uint8_t*) &count;
 				// make a fake signal on shear 1
@@ -363,10 +425,16 @@ void GPIO_ODD_IRQHandler(void) {
 
 	if (boardSetup_ptr->timeStampFlag){
 // TODO define a real time stamp
-		uint8_t timeStamp1=1;uint8_t timeStamp2=1;uint8_t timeStamp3=1;
-		dataBuffer[(pendingSamples*byteSample+byteSample-3) % bufferSize] =  timeStamp3;
-		dataBuffer[(pendingSamples*byteSample+byteSample-2) % bufferSize] =  timeStamp2;
-		dataBuffer[(pendingSamples*byteSample+byteSample-1) % bufferSize] =  timeStamp1;
+		uint32_t timeStamp = RTC->CNT;
+        uint8_t timeStamp_ptr;
+		//for (int i=0;i<4;i++){
+		//	dataBuffer[(pendingSamples*byteSample+(boardSetup_ptr->numSensor-1)*3+i+1) % bufferSize] =  timeStamp_ptr[i];
+		//}
+        dataBuffer[(pendingSamples*byteSample+(boardSetup_ptr->numSensor)*3+0) % bufferSize]= (timeStamp& 0x000000ff);
+        dataBuffer[(pendingSamples*byteSample+(boardSetup_ptr->numSensor)*3+1) % bufferSize]= (timeStamp& 0x0000ff00)>>8;
+        dataBuffer[(pendingSamples*byteSample+(boardSetup_ptr->numSensor)*3+2) % bufferSize]= (timeStamp& 0x00ff0000)>>16;
+        dataBuffer[(pendingSamples*byteSample+(boardSetup_ptr->numSensor)*3+3) % bufferSize]= (timeStamp& 0xff000000)>>24;
+
 	}
 	pendingSamples++; // Increment number of samples available
 

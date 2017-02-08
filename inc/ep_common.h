@@ -46,7 +46,7 @@ typedef struct epsiSetup {
 #define EPSI_SETUP_DEFAULT       \
 {20000000,                       \
 8,                               \
-2,                               \
+3,                               \
 3,								 \
 0x200,                           \
 1,                               \
@@ -55,7 +55,7 @@ typedef struct epsiSetup {
 0x13,                            \
 1000000,                         \
 460800,                          \
-0                                \
+1                                \
 }
 
 
@@ -64,9 +64,9 @@ typedef struct epsiSetup {
 /*************************************************************************/
 
 
-uint32_t numChannel;          // 2 temp 2 shear 1 cond 3 accelerometer
-uint32_t byteSample;         // 4 bytes in numChannel uint32 channel
-uint32_t bufferSize;      // numChannel*maxSamples
+uint32_t numChannel;        // 2 temp 2 shear 1 cond 3 accelerometer
+uint32_t byteSample;        // numbe of bytes per Sample
+uint32_t bufferSize;        // numChannel*maxSamples
 
 
 /*************************************************************************/
@@ -78,12 +78,9 @@ uint32_t bufferSize;      // numChannel*maxSamples
 /*************************************************************************/
 
 volatile uint8_t * dataBuffer;
-volatile uint8_t * channelSample;
 extern volatile uint32_t pendingSamples; // counter in the background IRQ
-volatile uint32_t samplesSent;    // counter in the foreground IRQ
-volatile uint32_t flagSync;       // flag to reset pending sample in the interrupt.
-extern volatile uint32_t txSentBytes;
+extern volatile uint32_t txSentBytes;    //
 extern epsiSetupPtr boardSetup_ptr;
 volatile uint32_t gulclockset;
-
+extern volatile uint32_t flagSync;
 #endif /* EP_COMMON_H_ */
