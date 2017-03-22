@@ -1,6 +1,6 @@
-src/epsilometer_analog.o: ../src/epsilometer_analog.c \
- /Users/aleboyer/SimplicityStudio/v4_workspace/Epsilometer_v1/inc/ep_analog.h \
- /Applications/Simplicity\ Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0//platform/emlib/inc/em_gpio.h \
+emlib/em_int.o: \
+ /Applications/Simplicity\ Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0/platform/emlib/src/em_int.c \
+ /Applications/Simplicity\ Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0//platform/emlib/inc/em_int.h \
  /Applications/Simplicity\ Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0//platform/Device/SiliconLabs/EFM32WG/Include/em_device.h \
  /Applications/Simplicity\ Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0//platform/Device/SiliconLabs/EFM32WG/Include/efm32wg842f256.h \
  /Applications/Simplicity\ Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0//platform/CMSIS/Include/core_cm4.h \
@@ -47,19 +47,9 @@ src/epsilometer_analog.o: ../src/epsilometer_analog.c \
  /Applications/Simplicity\ Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0//platform/Device/SiliconLabs/EFM32WG/Include/efm32wg_dmactrl.h \
  /Applications/Simplicity\ Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0//platform/Device/SiliconLabs/EFM32WG/Include/efm32wg_uart.h \
  /Applications/Simplicity\ Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0//platform/Device/SiliconLabs/EFM32WG/Include/efm32wg_af_ports.h \
- /Applications/Simplicity\ Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0//platform/Device/SiliconLabs/EFM32WG/Include/efm32wg_af_pins.h \
- /Applications/Simplicity\ Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0//platform/emlib/inc/em_bus.h \
- /Applications/Simplicity\ Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0//platform/emlib/inc/em_assert.h \
- /Users/aleboyer/SimplicityStudio/v4_workspace/Epsilometer_v1/inc/ep_common.h \
- /Users/aleboyer/SimplicityStudio/v4_workspace/Epsilometer_v1/inc/ep_coms.h \
- /Users/aleboyer/SimplicityStudio/v4_workspace/Epsilometer_v1/inc/ep_common.h \
- /Applications/Simplicity\ Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0//platform/emlib/inc/em_usart.h \
- /Applications/Simplicity\ Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0//platform/emlib/inc/em_cmu.h \
- /Applications/Simplicity\ Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0//platform/Device/SiliconLabs/EFM32WG/Include/efm32wg_uart.h
+ /Applications/Simplicity\ Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0//platform/Device/SiliconLabs/EFM32WG/Include/efm32wg_af_pins.h
 
-/Users/aleboyer/SimplicityStudio/v4_workspace/Epsilometer_v1/inc/ep_analog.h:
-
-/Applications/Simplicity\ Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0//platform/emlib/inc/em_gpio.h:
+/Applications/Simplicity\ Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0//platform/emlib/inc/em_int.h:
 
 /Applications/Simplicity\ Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0//platform/Device/SiliconLabs/EFM32WG/Include/em_device.h:
 
@@ -154,19 +144,3 @@ src/epsilometer_analog.o: ../src/epsilometer_analog.c \
 /Applications/Simplicity\ Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0//platform/Device/SiliconLabs/EFM32WG/Include/efm32wg_af_ports.h:
 
 /Applications/Simplicity\ Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0//platform/Device/SiliconLabs/EFM32WG/Include/efm32wg_af_pins.h:
-
-/Applications/Simplicity\ Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0//platform/emlib/inc/em_bus.h:
-
-/Applications/Simplicity\ Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0//platform/emlib/inc/em_assert.h:
-
-/Users/aleboyer/SimplicityStudio/v4_workspace/Epsilometer_v1/inc/ep_common.h:
-
-/Users/aleboyer/SimplicityStudio/v4_workspace/Epsilometer_v1/inc/ep_coms.h:
-
-/Users/aleboyer/SimplicityStudio/v4_workspace/Epsilometer_v1/inc/ep_common.h:
-
-/Applications/Simplicity\ Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0//platform/emlib/inc/em_usart.h:
-
-/Applications/Simplicity\ Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0//platform/emlib/inc/em_cmu.h:
-
-/Applications/Simplicity\ Studio.app/Contents/Eclipse/developer/sdks/exx32/v5.0.0.0//platform/Device/SiliconLabs/EFM32WG/Include/efm32wg_uart.h:

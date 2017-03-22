@@ -1750,7 +1750,7 @@ OUTPUT(Epsilometer_v1.axf elf32-littlearm)
  .comment       0x0000000000000000       0x71 ./src/epsilometer_coms.o
  .comment       0x0000000000000000       0x71 ./src/epsilometer_main.o
 
-.debug_line     0x0000000000000000     0x4cc0
+.debug_line     0x0000000000000000     0x4cc1
  .debug_line    0x0000000000000000       0xdf ./CMSIS/EFM32WG/startup_efm32wg.o
  .debug_line    0x00000000000000df      0x36a ./CMSIS/EFM32WG/system_efm32wg.o
  .debug_line    0x0000000000000449      0x5c5 ./Calendar/clock_tc.o
@@ -1766,9 +1766,9 @@ OUTPUT(Epsilometer_v1.axf elf32-littlearm)
  .debug_line    0x0000000000003599      0x35b ./src/epsilometer_CMU_init.o
  .debug_line    0x00000000000038f4      0x2d5 ./src/epsilometer_GPIO_init.o
  .debug_line    0x0000000000003bc9      0x29d ./src/epsilometer_TIMER_init.o
- .debug_line    0x0000000000003e66      0x66f ./src/epsilometer_analog.o
- .debug_line    0x00000000000044d5      0x3f8 ./src/epsilometer_coms.o
- .debug_line    0x00000000000048cd      0x3f3 ./src/epsilometer_main.o
+ .debug_line    0x0000000000003e66      0x670 ./src/epsilometer_analog.o
+ .debug_line    0x00000000000044d6      0x3f8 ./src/epsilometer_coms.o
+ .debug_line    0x00000000000048ce      0x3f3 ./src/epsilometer_main.o
 
 .debug_info     0x0000000000000000     0xa1ac
  .debug_info    0x0000000000000000      0x110 ./CMSIS/EFM32WG/startup_efm32wg.o
